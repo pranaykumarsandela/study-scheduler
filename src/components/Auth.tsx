@@ -110,9 +110,11 @@ export function Auth() {
     setLoading(true);
     setError(null);
 
+    const redirectTo = import.meta.env.VITE_SUPABASE_REDIRECT_URL || window.location.origin;
+
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
-        redirectTo: `${window.location.origin}`,
+        redirectTo,
       });
 
       if (error) throw error;
